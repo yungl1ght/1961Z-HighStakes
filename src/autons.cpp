@@ -229,7 +229,6 @@ void interfered_example() {
 // . . .
 
 void blueLeft(){
-  
   unclampMogo();
   intakeDown();
   chassis.pid_drive_set(-14.5_in, DRIVE_SPEED);
@@ -470,6 +469,58 @@ void redElimNegative(){
 }
 
 void blueElimPositive(){
+  unclampMogo();
+  intakeDown();
+  chassis.pid_drive_set(-14.5_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(30_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-10_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-14_in, 40);
+  pros::delay(1100);
+  clampMogo();
+  pros::delay(300);
+
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  pros::delay(400);
+  intakeOn();
+  pros::delay(200);
+  chassis.pid_drive_set(26_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  
+  pros::delay(1000);
+
+  chassis.pid_drive_set(-26_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(-45_deg, TURN_SPEED);
+  pros::delay(400);
+  intakeUp();
+  pros::delay(200);
+  chassis.pid_drive_set(35_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  pros::delay(500);
+
+  chassis.pid_drive_set(-35_in, DRIVE_SPEED);
+  pros::delay(400);
+  intakeDown();
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(45_deg, TURN_SPEED);
+  pros::delay(500);
+  chassis.pid_drive_set(70_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  doinker.set_value(1);
+  pros::delay(200);
+  chassis.pid_turn_set(225_deg, TURN_SPEED);
+  pros::delay(800);
+  unclampMogo();
+  pros::delay(200);
+  chassis.pid_drive_set(10_in, DRIVE_SPEED);
+  chassis.pid_wait();
 
 }
 
