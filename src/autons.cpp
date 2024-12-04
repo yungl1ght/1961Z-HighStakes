@@ -229,6 +229,11 @@ void interfered_example() {
 // . . .
 
 void blueLeft(){
+
+  // sets clamp in up position and puts intake down
+  // drives forward, turns, drives forward
+  // slows down right before mogo and then gets mogo clamped
+
   unclampMogo();
   intakeDown();
   chassis.pid_drive_set(-14.5_in, DRIVE_SPEED);
@@ -242,6 +247,9 @@ void blueLeft(){
   clampMogo();
   pros::delay(300);
 
+  // after clamping mogo, turns to single stack to the left
+  // turns intake on to score preload and drives to single stack
+
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   pros::delay(400);
   intakeOn();
@@ -250,6 +258,10 @@ void blueLeft(){
   chassis.pid_wait();
   
   pros::delay(1000);
+
+  // after single stack moves back to original mogo position
+  // turns to the upside down stack in front of the alliance stake
+  // puts intake up and drives towards reverse stack and gets top ring
 
   chassis.pid_drive_set(-26_in, DRIVE_SPEED);
   chassis.pid_wait();
@@ -262,6 +274,10 @@ void blueLeft(){
   chassis.pid_wait();
 
   pros::delay(500);
+
+  // drives back to original mogo position
+  // turns toward ladder
+  // puts ladybrown mech up and drives into ladder with clamp side
 
   chassis.pid_drive_set(-35_in, DRIVE_SPEED);
   pros::delay(400);
@@ -278,6 +294,12 @@ void blueLeft(){
 }
 
 void blueRight(){
+  
+  // sets clamp up and intake down
+  // drives forward, turns, and drives forward again
+  // slows down right before mogo and then gets clamp on mogo
+
+
   unclampMogo();
   intakeDown();
   chassis.pid_drive_set(-9_in, DRIVE_SPEED);
@@ -291,11 +313,19 @@ void blueRight(){
   clampMogo();
   chassis.pid_wait();
   pros::delay(500);
+
+  // turns after clamping mogo to go for the single stack first
+  // after single stack it goes for the 2 stacks next to each other
+  
+
   chassis.pid_turn_set(-95_deg, 70);
   intakeOn();
   pros::delay(200);
   chassis.pid_drive_set(19_in, DRIVE_SPEED);
   pros::delay(1250);
+
+  // left stack first
+
   chassis.pid_turn_set(-181_deg, TURN_SPEED);
   pros::delay(600);
   chassis.pid_drive_set(16_in, DRIVE_SPEED);
@@ -304,12 +334,17 @@ void blueRight(){
   chassis.pid_drive_set(-6_in, DRIVE_SPEED);
   pros::delay(550);
   
-  
+  // right stack second
+
   chassis.pid_turn_relative_set(24.5_deg, TURN_SPEED);
   pros::delay(400);
   chassis.pid_drive_set(9.5_in, DRIVE_SPEED);
   chassis.pid_wait();
   pros::delay(1000);
+
+  // moves back and swings to face ladder
+  // puts ladybrown mech up and drives into ladder with clamp side
+
   chassis.pid_drive_set(-12_in, DRIVE_SPEED);
   pros::delay(550);
   chassis.pid_swing_set(ez::RIGHT_SWING, -65_deg, SWING_SPEED, -30);
@@ -363,16 +398,26 @@ void redLeft(){
 }
 
 void redRight(){
+
+  // sets clamp in up position and puts intake down
+  // drives forward, turns, drives forward
+  // slows down right before mogo and then gets mogo clamped
+
   unclampMogo();
   intakeDown();
-  chassis.pid_drive_set(-18_in, DRIVE_SPEED);
+  chassis.pid_drive_set(-14.5_in, DRIVE_SPEED);
   chassis.pid_wait();
   chassis.pid_turn_set(-30_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-9_in, 60);
-  pros::delay(700);
+  chassis.pid_drive_set(-10_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-14_in, 40);
+  pros::delay(1100);
   clampMogo();
   pros::delay(300);
+
+  // after clamping mogo, turns to single stack to the left
+  // turns intake on to score preload and drives to single stack
 
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
   pros::delay(400);
@@ -382,6 +427,10 @@ void redRight(){
   chassis.pid_wait();
   
   pros::delay(1000);
+
+  // after single stack moves back to original mogo position
+  // turns to the upside down stack in front of the alliance stake
+  // puts intake up and drives towards reverse stack and gets top ring
 
   chassis.pid_drive_set(-26_in, DRIVE_SPEED);
   chassis.pid_wait();
@@ -395,17 +444,22 @@ void redRight(){
 
   pros::delay(500);
 
+  // drives back to original mogo position
+  // turns toward ladder
+  // puts ladybrown mech up and drives into ladder with clamp side
+
   chassis.pid_drive_set(-35_in, DRIVE_SPEED);
   pros::delay(400);
   intakeDown();
   chassis.pid_wait();
 
   chassis.pid_turn_set(-45_deg, TURN_SPEED);
-  pros::delay(400);
+  pros::delay(1200);
   lift.move_absolute(700, 127);
   pros::delay(250);
-  chassis.pid_drive_set(25_in, DRIVE_SPEED);
+  chassis.pid_drive_set(-25_in, DRIVE_SPEED);
   chassis.pid_wait();
+
 }
 
 void redElimPositive(){
