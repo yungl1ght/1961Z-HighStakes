@@ -463,6 +463,11 @@ void redRight(){
 }
 
 void redElimPositive(){
+
+  // sets clamp in up position and puts intake down
+  // drives forward, turns, drives forward
+  // slows down right before mogo and then gets mogo clamped
+
   unclampMogo();
   intakeDown();
   chassis.pid_drive_set(-18_in, DRIVE_SPEED);
@@ -474,6 +479,8 @@ void redElimPositive(){
   clampMogo();
   pros::delay(300);
 
+  
+
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
   pros::delay(400);
   intakeOn();
@@ -482,6 +489,8 @@ void redElimPositive(){
   chassis.pid_wait();
   
   pros::delay(1000);
+
+  
 
   chassis.pid_drive_set(-26_in, DRIVE_SPEED);
   chassis.pid_wait();
@@ -523,6 +532,11 @@ void redElimNegative(){
 }
 
 void blueElimPositive(){
+
+  // sets clamp in up position and puts intake down
+  // drives forward, turns, drives forward
+  // slows down right before mogo and then gets mogo clamped
+
   unclampMogo();
   intakeDown();
   chassis.pid_drive_set(-14.5_in, DRIVE_SPEED);
@@ -536,6 +550,9 @@ void blueElimPositive(){
   clampMogo();
   pros::delay(300);
 
+  // turns towards single stack
+  // turns intake on and drives into single stack
+
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   pros::delay(400);
   intakeOn();
@@ -544,6 +561,10 @@ void blueElimPositive(){
   chassis.pid_wait();
   
   pros::delay(1000);
+
+  // moves back to original mogo position
+  // turns towards reverse stack infront of alliance stake
+  // puts intake up and grabs top ring from reverse stake
 
   chassis.pid_drive_set(-26_in, DRIVE_SPEED);
   chassis.pid_wait();
@@ -557,6 +578,10 @@ void blueElimPositive(){
 
   pros::delay(500);
 
+  // moves back to original mogo position
+  // turns towards positive corner
+  // drives to positive corner
+
   chassis.pid_drive_set(-35_in, DRIVE_SPEED);
   pros::delay(400);
   intakeDown();
@@ -566,6 +591,11 @@ void blueElimPositive(){
   pros::delay(500);
   chassis.pid_drive_set(70_in, DRIVE_SPEED);
   chassis.pid_wait();
+
+  // puts doinker down
+  // spins to remove rings
+  // faces clamp side tangent to positive corner
+  // drops mogo and moves forward to get out the way
 
   doinker.set_value(1);
   pros::delay(200);
