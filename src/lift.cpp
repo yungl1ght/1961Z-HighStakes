@@ -6,7 +6,7 @@
 void liftControl(){
     // original get ring position
     if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)){
-        lift.move_absolute(400, 127);
+        lift.move_absolute(250, 127);
     }
     // scoring position
     if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
@@ -19,9 +19,9 @@ void liftControl(){
     // MANAS TWEAK THIS ONE
     // ADDING POSITION MAKES IT GO HIGHER, MINUSING POSITION MAKES IT GO LOWER
     // ITS LIKE A PID HEADING, 0 IS ALL THE WAY DOWN
-    /* if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)){
-        lift.move_absolute(200, 127);
-    } */
+     if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)){
+        lift.move_absolute(150, 127);
+    }
 }
 
 void intakeUp(){
