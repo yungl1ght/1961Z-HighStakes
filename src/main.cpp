@@ -44,10 +44,10 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
       
-      Auton("BLUE POSITIVE", blueLeft),
-      Auton("BLUE NEGATIVE", blueRight),
-      Auton("RED NEGATIVE", redLeft),
-      Auton("RED POSITIVE", redRight),
+      Auton("BLUE POSITIVE", bluePositive),
+      Auton("BLUE NEGATIVE", blueNegative),
+      Auton("RED NEGATIVE", redNegative),
+      Auton("RED POSITIVE", redPositive),
       Auton("RED Elims POSITIVE", redElimPositive),
       Auton("RED ELims NEGATIVE", redElimNegative),
       Auton("BLUE Elims POSITIVE", blueElimPositive),
