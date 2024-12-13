@@ -72,7 +72,7 @@ void interfered_example() {
 // Make your own autonomous functions here!
 // . . .
 
-void blueLeft(){
+void bluePositive(){
 
   // sets clamp in up position and puts intake down
   // drives forward, turns, drives forward
@@ -137,7 +137,7 @@ void blueLeft(){
 
 }
 
-void blueRight(){
+void blueNegative(){
   
   // sets clamp up and intake down
   // drives forward, turns, and drives forward again
@@ -200,7 +200,7 @@ void blueRight(){
 
 }
 
-void redLeft(){
+void redNegative(){
   unclampMogo();
   intakeDown();
   chassis.pid_drive_set(-9_in, DRIVE_SPEED);
@@ -241,7 +241,7 @@ void redLeft(){
   chassis.pid_drive_set(-26_in, DRIVE_SPEED);
 }
 
-void redRight(){
+void redPositive(){
 
   // sets clamp in up position and puts intake down
   // drives forward, turns, drives forward

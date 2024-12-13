@@ -13,10 +13,10 @@ void motion_chaining();
 void combining_movements();
 void interfered_example();
 
-void blueLeft();
-void blueRight();
-void redLeft();
-void redRight();
+void bluePositive();
+void blueNegative();
+void redNegative();
+void redPositive();
 
 void redElimNegative();
 void redElimPositive();
