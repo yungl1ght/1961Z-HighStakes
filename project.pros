@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "1961Z COMPLETE CODE",
+    "project_name": "spider back",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -421,8 +421,8 @@
       }
     },
     "upload_options": {
-      "description": "making code ez",
-      "icon": "alien"
+      "description": "honey bun",
+      "icon": "ufo"
     },
     "use_early_access": false
   }
