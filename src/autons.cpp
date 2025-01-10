@@ -21,6 +21,7 @@ void default_constants() {
   chassis.pid_turn_constants_set(3, 0.05, 20, 15);
   chassis.pid_swing_constants_set(6, 0, 65);
   chassis.drive_imu_scaler_set(1.0115);
+  
   chassis.pid_turn_exit_condition_set(80_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
   chassis.pid_swing_exit_condition_set(80_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
   chassis.pid_drive_exit_condition_set(80_ms, 1_in, 250_ms, 3_in, 500_ms, 500_ms);
@@ -30,47 +31,193 @@ void default_constants() {
   chassis.slew_drive_constants_set(7_in, 80);
 }
 
-///
-// Interference example
-///
-void tug(int attempts) {
-  for (int i = 0; i < attempts - 1; i++) {
-    // Attempt to drive backward
-    printf("i - %i", i);
-    chassis.pid_drive_set(-12_in, 127);
-    chassis.pid_wait();
-
-    // If failsafed...
-    if (chassis.interfered) {
-      chassis.drive_sensor_reset();
-      chassis.pid_drive_set(-2_in, 20);
-      pros::delay(1000);
-    }
-    // If the robot successfully drove back, return
-    else {
-      return;
-    }
-  }
-}
-
-// If there is no interference, the robot will drive forward and turn 90 degrees.
-// If interfered, the robot will drive forward and then attempt to drive backward.
-void interfered_example() {
-  chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-
-  if (chassis.interfered) {
-    tug(3);
-    return;
-  }
-
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait();
-}
 
 // . . .
 // Make your own autonomous functions here!
 // . . .
+
+void skills(){
+  // i hate vex
+  
+  // hopefully scores alliance stake and puts everything down
+
+  lift.move_absolute(1875, 127);
+  pros::delay(1000);
+  intakePiston.set_value(1);
+  doinker.set_value(0);
+  unclampMogo();
+  lift.move_absolute(0, 127);
+
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-28_in, 50);
+  pros::delay(400);
+  clampMogo();
+  chassis.pid_wait();
+
+  intakeOn();
+  chassis.pid_turn_set(-180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(24_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(26_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-0_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(52_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(135_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(18_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  intakeOff();
+
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-135_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-38_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  unclampMogo();
+  chassis.pid_drive_set(38_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-66_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-12_in, 50);
+  pros::delay(400);
+  clampMogo();
+  chassis.pid_wait();
+
+  intakeOn();
+  chassis.pid_turn_set(180_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(24_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  
+  chassis.pid_turn_set(270_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(24_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(0_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(38_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(-135_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(20_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  intakeOff();
+
+  chassis.pid_turn_set(-90_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(135_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(38_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  unclampMogo();
+
+  chassis.pid_drive_set(8_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  intakeOn();
+  liftLoad();
+  
+  chassis.pid_drive_set(56_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-90_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  pros::delay(700);
+  intakeOff();
+
+  liftScore();
+  chassis.pid_drive_set(8_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-18_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  liftLoad();
+  chassis.pid_turn_set(-180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  intakeOn();
+  chassis.pid_drive_set(26_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-26_in, DRIVE_SPEED);
+  pros::delay(700);
+  intakeOff();
+  chassis.pid_wait();
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(8_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  liftScore();
+  chassis.pid_drive_set(6_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-18_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  liftDown();
+
+  chassis.pid_turn_set(-180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(26_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  intakeOn();
+  chassis.pid_drive_set(34_in, DRIVE_SPEED);
+  pros::delay(500);
+  intakeOff();
+  chassis.pid_turn_set(-30_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-26_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-8_in, 50);
+  pros::delay(500);
+  clampMogo();
+  chassis.pid_wait();
+  intakeOn();
+
+  chassis.pid_turn_set(45_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(35_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(42_in, 75);
+  chassis.pid_wait();
+  chassis.pid_turn_set(0_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-32_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  unclampMogo();
+  chassis.pid_drive_set(5_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  clampMogo();
+  chassis.pid_drive_set(-14_in, 80);
+  chassis.pid_wait();
+  chassis.pid_drive_set(4_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(144_in, 127);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-4_in, DRIVE_SPEED);
+  chassis.pid_wait();
+}
 
 void bluePositive(){
 
@@ -494,3 +641,21 @@ void blueElimNegative(){
   chassis.pid_drive_set(-26_in, DRIVE_SPEED);
   chassis.pid_wait();
 }
+
+ /* void bluePositiveNew(){
+  intakeOn();
+  chassis.pid_drive_set(50_in, 85, true);
+  chassis.pid_wait_until(36_in);
+  intakeOff();
+  bottomIntakeOnly();
+  chassis.pid_wait();
+  
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-26_in, DRIVE_SPEED);
+  chassis.pid_wait_until(-22_in);
+  chassis.pid_speed_max_set(50);
+  pros::delay(400);
+  clampMogo();
+
+} */

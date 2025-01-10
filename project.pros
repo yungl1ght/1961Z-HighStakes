@@ -422,7 +422,8 @@
     },
     "upload_options": {
       "description": "honey bun",
-      "icon": "ufo"
+      "icon": "alien",
+      "slot": 3
     },
     "use_early_access": false
   }

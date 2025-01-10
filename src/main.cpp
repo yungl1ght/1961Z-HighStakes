@@ -1,5 +1,6 @@
 #include "main.h"
 #include "autons.hpp"
+#include "pros/rtos.hpp"
 #include "subsystems.hpp"
 
 /////
@@ -61,6 +62,7 @@ void initialize() {
   lift.tare_position();
 }
 
+
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -103,6 +105,8 @@ void autonomous() {
   ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
 }
 
+
+
 /**
  * Runs the operator control code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -123,6 +127,10 @@ void opcontrol() {
   doinker.set_value(0);
   chassis.drive_brake_set(driver_preference_brake);
   lift.move_absolute(0, 127);
+  
+
+
+  
   while (true) {
     // PID Tuner
     // After you find values that you're happy with, you'll have to set them in auton.cpp
@@ -158,6 +166,8 @@ void opcontrol() {
     liftControl();
     doinkerControl();
     // autonTestor();
+
+    
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }

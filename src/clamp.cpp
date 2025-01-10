@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool state = false;
+bool state = true;
 
 void clampControl(){
     if(master.get_digital_new_press(DIGITAL_L2)){
