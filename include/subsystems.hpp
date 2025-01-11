@@ -10,7 +10,7 @@
 
 
 
-inline pros::MotorGroup intake({1,-2});
+inline pros::MotorGroup intake({1,2});
 inline pros::Motor lift(-9);
 
 inline pros::adi::DigitalOut clamp1(5);
